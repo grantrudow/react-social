@@ -1,0 +1,71 @@
+.login > img {
+    top: 0;
+    left: 0;
+    z-index: -100;
+    object-fit: cover;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
+
+.login__content {
+    background: #f5f5f5;
+    grid-column: 4/9;
+    height: 100vh;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+.login__contentButtons {
+    grid-column: 1/9;
+    align-self: flex-start;
+}
+
+.login__contentButtons {
+    padding-top: 30px;
+}
+
+.login__mainContent {
+    grid-column: 2/8;
+}
+
+.login__title {
+    grid-column: 1/4;
+    text-align: left;
+}
+
+.login__title > h4 {
+    font-size: 1.4em;
+}
+
+.login__title > h2 {
+    font-size: 2em;
+}
+
+.login__fields {
+    grid-column: 5/9;
+}
+
+.login__fields > input {
+    grid-column: 1/9;
+}
+
+#signIn {
+    grid-column: 2/3;
+    height: 40px;
+    background: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#signUp {
+    grid-column: 7/8;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #3F5DFC;
+}

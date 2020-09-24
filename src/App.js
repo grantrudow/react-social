@@ -1,21 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 // Components
-import Sidebar from './components/Sidebar/Sidebar'
+import Sidebar from './components/Sidebar/Sidebar';
+import Login from './components/Login/Login';
 
 function App() {
   return (
-    <div className="App">
-      <h1>New Social Media App</h1>
-      <Sidebar width={300} height={"100vh"}>
-        <h1>Friends</h1>
-        <h1>Profile</h1>
-        <h1>Settings</h1>
-      </Sidebar>
-    </div>
+    <Router>
+        <div className="App">
+          <Switch>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route path='/'>
+              <h1>Home</h1>
+            </Route>
+          </Switch>
+        </div>
+    </Router>
   );
 }
 
 export default App;
+
+{/* <Sidebar width={300} height={"100vh"}>
+      <h1>Friends</h1>
+      <h1>Profile</h1>
+      <h1>Settings</h1>
+</Sidebar> */}
