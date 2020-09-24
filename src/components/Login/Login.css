@@ -14,6 +14,7 @@
     height: 100vh;
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
+    box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.5);
 }
 
 .login__contentButtons {
@@ -27,11 +28,13 @@
 
 .login__mainContent {
     grid-column: 2/8;
+    margin-top: -80px;
 }
 
 .login__title {
     grid-column: 1/4;
     text-align: left;
+    
 }
 
 .login__title > h4 {
@@ -39,15 +42,42 @@
 }
 
 .login__title > h2 {
-    font-size: 2em;
+    font-size: 2.5em;
 }
 
 .login__fields {
-    grid-column: 5/9;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    width: 100%;
+    grid-column: 4/9;
+    padding-left: 25px;
 }
 
 .login__fields > input {
-    grid-column: 1/9;
+    height: 50px;
+    padding: 10px;
+    border: none;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.login__fields > button {
+    height: 40px;
+    margin-top: 25px;
+    width: 40%;
+    border: none;
+    background: #3F5DFC;
+    border-radius: 15px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.spacer {
+    height: 150px;
 }
 
 #signIn {
@@ -68,4 +98,8 @@
     font-size: 1.1em;
     font-weight: bold;
     color: #3F5DFC;
+}
+
+#password {
+    margin-top: 25px;
 }

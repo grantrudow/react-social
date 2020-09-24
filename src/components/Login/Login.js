@@ -16,7 +16,7 @@ function Login() {
                 <div className="login__mainContent grid">
                     <div className="login__title">
                         <h4>welcome back</h4>
-                        <h2>Login to meet up with other devs</h2>
+                        <h2>Log in to meet up with other devs</h2>
                     </div>
                     <div className="login__fields grid">
                         <input id="email" type="email" placeholder="Email" />
@@ -24,6 +24,7 @@ function Login() {
                         <button type="submit">Login</button>
                     </div>
                 </div>
+                <div className="spacer"></div>
             </div>
         </div>
     )
