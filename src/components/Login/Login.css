@@ -62,6 +62,7 @@
     border-radius: 15px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
     outline: none;
+    margin-bottom: 25px;
 }
 
 .login__fields > button {
@@ -100,6 +101,3 @@
     color: #3F5DFC;
 }
 
-#password {
-    margin-top: 25px;
-}
