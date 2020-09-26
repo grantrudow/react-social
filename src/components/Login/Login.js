@@ -14,6 +14,9 @@ function Login() {
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
 
+    const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+
     const onSignUp = () => {
         if (signingUp) {
             setSigningUp(false)
@@ -24,23 +27,46 @@ function Login() {
     }
 
     const registerUser = async (firstName, lastName, email) => {
-        const response = await axios({
-            method: 'post',
-            url: `/signup`,
-            data: {
-                firstName: firstName,
-                lastName: lastName,
-                email: email
+        if (name && email && password && confirmPassword) {
+            if (password === confirmPassword) {
+                if (strongRegex.test(password)) {
+                    console.log('strong password')
+                    
+                    const response = await axios({
+                        method: 'post',
+                        url: `/signup`,
+                        data: {
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email
+                        }
+                    });
+                } else if (mediumRegex.test(password)) {
+                    console.log('medium password')
+
+                    const response = await axios({
+                        method: 'post',
+                        url: `/signup`,
+                        data: {
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email
+                        }
+                    });
+                } else {
+                    console.log("Password isn't strong enough")
+                }
+            } else {
+                console.log('passwords do not match')
             }
-        });
+        } else {
+            console.log('Please fill out all fields')
+        }
     }
 
     const onRegister = () => {
-        console.log('Lets register this dawg')
-
         let firstName = name.split(' ').slice(0, -1). join(' ');
         let lastName = name.split(' ').slice(-1).join(' ');
-
         registerUser(firstName, lastName, email);
     }
 
@@ -76,10 +102,10 @@ function Login() {
                     </div>
                     {signingUp == true ? 
                         <div className="login__fields grid">
-                            <input id="name" type="name" onChange={onNameChange} placeholder="Full Name" />
-                            <input id="email" type="email" onChange={onEmailChange} placeholder="Email" />
-                            <input id="password" type="password" onChange={onPassChange} placeholder="Password" />
-                            <input id="password" type="password" onChange={onConfirmPassChange} placeholder="Confirm Password" />
+                            <input type="name" onChange={onNameChange} placeholder="Full Name" />
+                            <input type="email" onChange={onEmailChange} placeholder="Email" />
+                            <input type="password" onChange={onPassChange} placeholder="Password" />
+                            <input type="password" onChange={onConfirmPassChange} placeholder="Confirm Password" />
                             <button type="submit" onClick={onRegister}>Register</button>
                         </div>
                     :
