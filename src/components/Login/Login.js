@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import './Login.css';
-import { Link, useHistory } from 'react-router-dom';
-import axios from '../../axios';
+import { Link, withRouter } from 'react-router-dom';
+
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -24,7 +24,8 @@ class Login extends Component {
     componentDidMount() {
         // If logged in and user navigates to Register page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
-            this.props.history.push('/dashboard');
+            // this.props.history.push('/dashboard');
+            console.log('This will push to dashboard')
         }
     }
 
@@ -134,7 +135,7 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     { loginUser }
-)(Login);
+)(Login));

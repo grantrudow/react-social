@@ -55,7 +55,7 @@ class App extends Component {
                 <Dashboard />
               </PrivateRoute>
               <Route path='/'>
-                <h1>Home</h1>
+                <Dashboard />
               </Route>
             </Switch>
           </div>

@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
+import './Dashboard.css'
+
+// Components
+import DashboardRight from '../DashboardRight/DashboardRight';
+import DashboardLeft from '../DashboardLeft/DashboardLeft';
+import DashboardCenter from '../DashboardCenter/DashboardCenter';
+import Navbar from '../Navbar/Navbar';
 
 class Dashboard extends Component {
 	onLogoutClick = e => {
@@ -14,8 +21,22 @@ class Dashboard extends Component {
 
 		return (
 			<div className="dashboard">
-				<h1>This is the dashboard</h1>
-				<button onClick={this.onLogoutClick}>Logout</button>
+				{/* <div className="navBar">
+					<h1>This is the dashboard</h1>
+					<button onClick={this.onLogoutClick}>Logout</button>
+				</div> */}
+				<Navbar />
+				<div className="dashboard__mainGrid">
+					<div className="dashboard__left">
+						<DashboardLeft />
+					</div>
+					<div className="dashboard__center">
+						<DashboardCenter />
+					</div>
+					<div className="dashboard__right">
+						<DashboardRight />
+					</div>
+				</div>
 			</div>
 		)
 	}

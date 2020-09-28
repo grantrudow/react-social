@@ -12,7 +12,7 @@ import {
 export const registerUser = (userData, history) => dispatch => {
 	axios
 		.post('/api/users/register', userData)
-		.then(res => history.push('/login')) //Redirect to login on successful register
+		.then(res => history.push('/dashboard')) //Redirect to login on successful register
 		.catch(err => dispatch ({
 			type: GET_ERRORS,
 			payload: err.response.data
@@ -25,7 +25,7 @@ export const loginUser = userData => dispatch => {
 		.post('/api/users/login', userData)
 		.then(res => {
 			// Save to local storage
-
+			
 			// Set token to localstorage
 			const { token } = res.data;
 			localStorage.setItem('jwtToken', token);
@@ -35,14 +35,15 @@ export const loginUser = userData => dispatch => {
 			
 			// Decode token to get user data
 			const decoded = jwt_decode(token);
-			
+
 			// Set current user
 			dispatch(setCurrentUser(decoded));
 		})
 		.catch(err => dispatch({
 			type: GET_ERRORS,
-			payload: err.response.data
-		}));
+			payload: 'this is an error'
+		})
+	);	
 };
 
 // Set logged in user
