@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './utils/setAuthToken';
+import { setCurrentUser, logoutUser } from './actions/authActions';
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -9,6 +12,31 @@ import store from './store';
 import Sidebar from './components/Sidebar/Sidebar';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import Dashboard from './components/Dashboard/Dashboard';
+import PrivateRoute from './components/private-route/PrivateRoute';
+
+// Check to token to keep user logged in
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  const token = localStorage.jwtToken;
+  setAuthToken(token);
+
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(token);
+
+  // Set user and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
+
+  // Check for expired token
+  const currentTime = Date.now() / 1000; //To get it into milliseconds
+  if(decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+
+    // Redirect to login
+    window.location.href = './login';
+  }
+}
 
 class App extends Component {
   render() {
@@ -23,6 +51,9 @@ class App extends Component {
               <Route exact path='/register'>
                 <Register />
               </Route>
+              <PrivateRoute exact path='/dashboard'>
+                <Dashboard />
+              </PrivateRoute>
               <Route path='/'>
                 <h1>Home</h1>
               </Route>
