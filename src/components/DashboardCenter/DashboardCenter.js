@@ -1,10 +1,10 @@
 import React from 'react';
 import './DashboardCenter.css'
 
-function DashboardCenter() {
+function DashboardCenter(props) {
 	return (
 		<div className="dashboardCenter">
-			<h1>This is the center</h1>
+			{props.children}
 		</div>
 	)
 }

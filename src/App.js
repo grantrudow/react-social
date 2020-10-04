@@ -14,6 +14,8 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Dashboard from './components/Dashboard/Dashboard';
 import PrivateRoute from './components/private-route/PrivateRoute';
+import Navbar from './components/Navbar/Navbar';
+import ModalContainer from './components/ModalContainer/ModalContainer';
 
 // Check to token to keep user logged in
 if (localStorage.jwtToken) {
@@ -40,6 +42,7 @@ if (localStorage.jwtToken) {
 
 class App extends Component {
   render() {
+
     return (
       <Provider store={store}>
         <Router>
@@ -52,9 +55,13 @@ class App extends Component {
                 <Register />
               </Route>
               <PrivateRoute exact path='/dashboard'>
+              <ModalContainer hideModal={this.props.hideModal} />
+                <Navbar />
                 <Dashboard />
               </PrivateRoute>
               <Route path='/'>
+                <ModalContainer hideModal={this.props.hideModal} />
+                <Navbar />
                 <Dashboard />
               </Route>
             </Switch>
