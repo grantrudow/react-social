@@ -22,12 +22,18 @@ class Navbar extends Component {
 	constructor(props) {
 		super()
 		this.openAlertModal = this.openAlertModal.bind(this)
+		this.openCreatePostModal = this.openCreatePostModal.bind(this)
+		this.closeModal = this.closeModal.bind(this)
 	}
 
 	onLogoutClick = e => {
 		e.preventDefault();
 		this.props.logoutUser();
 	};
+
+	closeModal = () => {
+		this.props.hideModal();
+	}
 
 	openAlertModal = (event) => {
 		this.props.showModal({
@@ -36,6 +42,32 @@ class Navbar extends Component {
 			message: 'hi',
 			closeModal: this.closeModal
 		}, 'alert')
+	}
+
+	openCreatePostModal = (event) => {
+		this.props.showModal({
+			open: true,
+			title: 'Create Post',
+			closeModal: this.closeModal,
+			fields: [{
+				name: 'Title',
+				placeholder: 'Post Title',
+				showLabel: true
+				},
+				{
+					name: 'Subject',
+					placeholder: 'Post Subject',
+					showLabel: false
+				},
+				{
+					name: 'Message',
+					placeholder: 'Enter your message here',
+					showLabel: true
+				}
+			],
+			onInputChange: this.onInputChange, 
+			confirmAction: this.confirmAction
+		}, 'createPost')
 	}
 
 	render() {
@@ -52,7 +84,7 @@ class Navbar extends Component {
 					</div>
 				</div>
 				<div className="navbar__createPost">
-					<button onClick={this.openAlertModal}>Create Post</button>
+					<button onClick={this.openCreatePostModal}>Create Post</button>
 				</div>
 				<div className="navbar__profile">
 					<button onClick={this.onLogoutClick}>Logout</button>

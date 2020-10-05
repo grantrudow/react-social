@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './ModalContainer.css';
 
 // Redux Actions
 import { hideModal, showModal } from '../../actions/modalActions';
@@ -7,7 +8,6 @@ import { hideModal, showModal } from '../../actions/modalActions';
 // Components
 import ReactModal from 'react-modal';
 import {default as modalTypes} from '../ModalTypes';
-import ModalBackdrop from '../ModalBackdrop/ModalBackdrop';
 
 const mapStateToProps = state => ({
 	...state.modal
@@ -21,7 +21,8 @@ const MODAL_TYPES = {
 	'alert': modalTypes.alertModal,
 	'confirm': modalTypes.confirmModal,
 	'delete': modalTypes.deleteModal,
-	'prompt': modalTypes.prompt
+	'prompt': modalTypes.promptModal,
+	'createPost': modalTypes.createPostModal
 }
 
 class ModalContainer extends Component {
@@ -54,22 +55,20 @@ class ModalContainer extends Component {
 
 		return (
 			<div>
-				<ModalBackdrop>
 					<ReactModal
+						className="modal"
+						overlayClassName='modal-overlay'
 						isOpen = {this.state.modalIsOpen}
-
-						
 						onAfterOpen = {this.afterOpenModal}
 						onRequestClose={this.closeModal}
-						contentLabel = 'Example Modal'
+						contentLabel = 'Modal'
 						ariaHideApp = {false}
 					>
 						<SpecifiedModal
 							closeModal = {this.closeModal}
 							{...this.props.modalProps}
-							/>
+						/>
 					</ReactModal>
-				</ModalBackdrop>
 			</div>
 		)
 	}
