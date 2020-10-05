@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactModal from 'react-modal';
 
+// Redux Actions
+import { hideModal, showModal } from '../../actions/modalActions';
+
+// Components
+import ReactModal from 'react-modal';
 import {default as modalTypes} from '../ModalTypes';
+import ModalBackdrop from '../ModalBackdrop/ModalBackdrop';
 
 const mapStateToProps = state => ({
 	...state.modal
+})
+
+const mapDispatchToProps = dispatch => ({
+	hideModal: () => dispatch(hideModal())
 })
 
 const MODAL_TYPES = {
@@ -19,7 +28,7 @@ class ModalContainer extends Component {
 	constructor(props) {
 		super();
 		this.state = {
-			modalIsOpen: props.modalProps.open
+			modalIsOpen: props.modalProps.open,
 		}
 		this.closeModal = this.closeModal.bind(this)
 	}
@@ -45,18 +54,22 @@ class ModalContainer extends Component {
 
 		return (
 			<div>
-				<ReactModal
-					isOpen = {this.state.modalIsOpen}
-					onAfterOpen = {this.afterOpenModal}
-					onRequestClose={this.closeModal}
-					contentLabel = 'Example Modal'
-					ariaHideApp = {false}
-				>
-					<SpecifiedModal
-						closeModal = {this.closeModal}
-						{...this.props.modalProps}
-						/>
-				</ReactModal>
+				<ModalBackdrop>
+					<ReactModal
+						isOpen = {this.state.modalIsOpen}
+
+						
+						onAfterOpen = {this.afterOpenModal}
+						onRequestClose={this.closeModal}
+						contentLabel = 'Example Modal'
+						ariaHideApp = {false}
+					>
+						<SpecifiedModal
+							closeModal = {this.closeModal}
+							{...this.props.modalProps}
+							/>
+					</ReactModal>
+				</ModalBackdrop>
 			</div>
 		)
 	}
@@ -64,5 +77,5 @@ class ModalContainer extends Component {
 
 export default connect(
 	mapStateToProps,
-	null
+	mapDispatchToProps
 )(ModalContainer);
