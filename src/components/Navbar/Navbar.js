@@ -47,26 +47,7 @@ class Navbar extends Component {
 	openCreatePostModal = (event) => {
 		this.props.showModal({
 			open: true,
-			title: 'Create Post',
 			closeModal: this.closeModal,
-			fields: [{
-				name: 'Title',
-				placeholder: 'Post Title',
-				showLabel: true
-				},
-				{
-					name: 'Subject',
-					placeholder: 'Post Subject',
-					showLabel: false
-				},
-				{
-					name: 'Message',
-					placeholder: 'Enter your message here',
-					showLabel: true
-				}
-			],
-			onInputChange: this.onInputChange, 
-			confirmAction: this.confirmAction
 		}, 'createPost')
 	}
 

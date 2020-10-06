@@ -1,81 +1,120 @@
-import React from 'react';
-import './ModalCSS/CreatePostModal.css';
+import React, { Component } from "react";
+import "./ModalCSS/CreatePostModal.css";
 
-// MaterialUI Components
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import { connect } from 'react-redux';
+import { createPost } from '../../actions/postActions';
+import { withRouter } from "react-router-dom";
 
-// Material UI Icons
-import DeleteIcon from '@material-ui/icons/Delete'
-
-const useStyles = makeStyles((theme) => ({
-	root: {
-		'& > *': {
-			margin: theme.spacing(1),
-			width: '25ch',
-		},
-	},
-}));
-
-const CreatePostModal = ({ closeModal, confirmAction, title,
-	fields, onInputChange, showLabel }) => {
-
-	const classes = useStyles();
-
-	const onTitleChange = (event) => {
-		console.log(event.target.value)
+class CreatePostModal extends Component {
+	constructor(props) {
+		super();
+		this.state = {
+			title: '',
+			category: '',
+			message: ''
+		}
 	}
 
-	const onSubjectChange = (event) => {
-		console.log(event.target.value)
+	componentDidMount() {
+		// If not logged in it won't let user click on post
+		if (!this.props.auth.isAuthenticated) {
+			console.log('NO YOU ARE NOT LOGGED IN')
+
+			// TODO: MAKE CREATE POST BUTTON NOT WORK IF NOT LOGGED IN
+		}
 	}
 
-	const onMessageChange = (event) => {
-		console.log(event.target.value)
+	// Set state when the input values change
+	onChange = e => {
+		this.setState({[e.target.id] : e.target.value})
 	}
 
-	return (
-	  <div className="modal-content">
-		<div className="modal-header">
-		  	<h5 className="modal-title">
-			  {title}
-			</h5>
-			<IconButton aria-label="delete" onClick={closeModal} >
-				<DeleteIcon />
-			</IconButton >
-		</div>
-		<div className="modal-body">
-		  <form className={classes.root} noValidate autoComplete="off">
-			<TextField 
-				id="outlined-basic" 
-				label="Post Title" 
-				variant="outlined" 
-				onChange={onTitleChange} 
-			/>
-			<TextField 
-				id="outlined-basic" 
-				label="Post Subject" 
-				variant="outlined" 
-				onChange={onSubjectChange} 
-			/>
-			<TextField
-          		id="standard-multiline-flexible"
-				label="Multiline"
-				multiline
-				rowsMax={4}
-				// value={value}
-				onChange={onMessageChange}
-				variant="outlined"
-  			/>
-			<Button variant="contained" color="primary">
-				Send Post
-			</Button>
-		  </form>
-		</div>
-	  </div>
-	)
-  }
-  
-  export default CreatePostModal
+	onSubmit = e => {
+		// Prevent page reload
+		e.preventDefault();
+		
+		// set postData object
+		const postData = {
+			title: this.state.title,
+			category: this.state.category,
+			message: this.state.message
+		}
+
+		// Use createPost action on the postData
+		this.props.createPost(postData)
+		
+	};
+
+	render() {
+		return (
+			<div className="modal-content">
+				<div className="modal-body">
+					<form onSubmit={this.onSubmit} noValidate autoComplete="off">
+						<label className="createPost__label" htmlFor="post-title">
+							Title
+						</label>
+						<input
+							className="createPost__input"
+							type="text"
+							id="title"
+							placeholder="Title"
+							onChange={this.onChange}
+							value={this.state.title}
+						/>
+	
+						<label className="createPost__label" htmlFor="post-category">
+							Category
+						</label>
+						<input
+							className="createPost__input"
+							type="text"
+							id="category"
+							placeholder="Category"
+							onChange={this.onChange}
+							value={this.state.category}
+						/>
+	
+						<label className="createPost__label" htmlFor="post-message">
+							Message
+						</label>
+						<textarea
+							className="createPost__input"
+							id="message"
+							placeholder="Message"
+							onChange={this.onChange}
+							value={this.state.message}
+						/>
+	
+						<div className="modal__buttons">
+							<button
+								id="createPost__delete"
+								className="createPost__button"
+								onClick={this.props.closeModal}
+							>
+								Discard
+							</button>
+							<button
+								type="submit"
+								id="createPost__submit"
+								className="createPost__button"
+							>
+								Send Post
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		);
+	}
+    
+};
+
+const mapStateToProps = state => ({
+	auth: state.auth,
+	closeModal: state.closeModal
+})
+
+export default connect(
+	mapStateToProps,
+	{ createPost }
+)(CreatePostModal);

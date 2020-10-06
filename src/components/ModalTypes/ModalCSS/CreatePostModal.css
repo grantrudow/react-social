@@ -1,3 +1,52 @@
-.modal-content {
-	width: 100%;
+.modal-body > form {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+
+}
+
+.createPost__label {
+	grid-column: 1/9;
+	padding: 15px 0 10px 0;
+	font-family: 'Open Sans'
+}
+
+.createPost__input {
+	grid-column: 1/9;
+	height: 45px;
+	padding: 5px;
+	font-family: 'Open Sans'
+}
+
+#message {
+	height: 150px;
+	resize: none;
+	font-family: 'Open Sans'
+}
+
+.modal__buttons {
+	padding-top: 25px;
+	grid-column: 3/7;
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-gap: 10px;
+
+}
+
+.modal__buttons > button {
+	height: 45px;
+}
+
+#createPost__delete {
+	grid-column: 1/5;
+	border: none;
+	background-color: red;
+	color: white;
+	border-radius: 45px;
+}
+
+#createPost__submit {
+	grid-column: 5/9;
+	border: none;
+	background-color: #D08EF4;
+	border-radius: 45px;
 }
