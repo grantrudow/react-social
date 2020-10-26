@@ -1,0 +1,11 @@
+.sidebarFilter {
+	border: 1px solid black;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	text-align: left;
+	padding: 25px 10px 25px 50px;
+}
+
+.sidebarFilter > h1 {
+	padding: 15px 0 15px 0;
+}

@@ -1,0 +1,20 @@
+.meetPage {
+	margin-top: 35px;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+}
+
+.meetPage__title {
+	grid-column: 1/13;
+	text-align: center;
+	font-size: 1.5em;
+}
+.meetPage__filter {
+	grid-column: 1/3;
+	padding-top: 25px;
+}
+
+.meetPage__list {
+	grid-column: 4/9;
+	
+}

@@ -4,6 +4,12 @@ import "./ModalCSS/CreatePostModal.css";
 import { connect } from 'react-redux';
 import { createPost } from '../../actions/postActions';
 import { withRouter } from "react-router-dom";
+import { hideModal } from '../../actions/modalActions';
+
+const mapDispatchToProps = dispatch => ({
+	hideModal: () => dispatch(hideModal()),
+	createPost: () => dispatch(createPost())
+})
 
 class CreatePostModal extends Component {
 	constructor(props) {
@@ -13,6 +19,7 @@ class CreatePostModal extends Component {
 			category: '',
 			message: ''
 		}
+		this.closeModal = this.closeModal.bind(this)
 	}
 
 	componentDidMount() {
@@ -24,9 +31,20 @@ class CreatePostModal extends Component {
 		}
 	}
 
-	// Set state when the input values change
+	// Set state when the input values change 
 	onChange = e => {
 		this.setState({[e.target.id] : e.target.value})
+	}
+
+	// Close modal function linked to hideModal dispatch
+	closeModal = () => {
+		this.props.hideModal();
+	}
+
+
+	// TODO: REPLACE WITH LOADING FUNCTION
+	timeoutCloseModal = () => {
+		setTimeout(() => this.props.hideModal(), 2000)
 	}
 
 	onSubmit = e => {
@@ -41,7 +59,10 @@ class CreatePostModal extends Component {
 		}
 
 		// Use createPost action on the postData
-		this.props.createPost(postData)
+		this.props.createPost(postData);
+		
+		// Hard coded timeout function (2 seconds)
+		this.timeoutCloseModal();
 		
 	};
 
@@ -89,7 +110,7 @@ class CreatePostModal extends Component {
 							<button
 								id="createPost__delete"
 								className="createPost__button"
-								onClick={this.props.closeModal}
+								onClick={this.closeModal}
 							>
 								Discard
 							</button>
@@ -116,5 +137,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ createPost }
+	mapDispatchToProps
 )(CreatePostModal);

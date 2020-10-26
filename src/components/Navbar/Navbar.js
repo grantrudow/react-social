@@ -9,6 +9,9 @@ import './Navbar.css';
 import SearchIcon from '@material-ui/icons/Search';
 import ModalContainer from '../ModalContainer/ModalContainer';
 
+// TEMP COMPONENT REMOVE ON DEPLOY
+import faker from 'faker';
+
 // Modal Dispatch 
 const mapDispatchToProps = dispatch => ({
 	hideModal: () => dispatch(hideModal()),
@@ -54,25 +57,22 @@ class Navbar extends Component {
 	render() {
 
 		return (
-			<div className="navbar">
-				<div className="navbar__logo">
-					<h1>Meet.A.Dev.</h1>
-				</div>
-				<div className="navbar__center">
-					<h3>Main Stream</h3>
-					<div className="navbar__searchbox">
-						<SearchIcon style={{ color: '#3EBDC6', fontSize: 40 }}/>
+			<div className="navbar__fullWidth">
+				<div className="navbar">
+					<div className="navbar__menu">
+						<h3>Meet</h3>
+						<h3>Greet</h3>
+						<h3>Work</h3>
+					</div>
+					<div className="navbar__createPost">
+						<button onClick={this.openCreatePostModal}>Create Post</button>
+					</div>
+					<div className="navbar__profile">
+						<button onClick={this.onLogoutClick}>Logout</button>
+						<h3>{faker.name.findName()}</h3>
+						<img src={faker.image.avatar()} />
 					</div>
 				</div>
-				<div className="navbar__createPost">
-					<button onClick={this.openCreatePostModal}>Create Post</button>
-				</div>
-				<div className="navbar__profile">
-					<button onClick={this.onLogoutClick}>Logout</button>
-					<h3>Grant Rudow</h3>
-					<img src={'https://images.unsplash.com/photo-1581992652564-44c42f5ad3ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'} />
-				</div>
-				
 			</div>
 		)
 	}

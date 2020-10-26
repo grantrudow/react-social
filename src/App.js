@@ -16,6 +16,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import PrivateRoute from './components/private-route/PrivateRoute';
 import Navbar from './components/Navbar/Navbar';
 import ModalContainer from './components/ModalContainer/ModalContainer';
+import MeetPage from './components/MeetPage/MeetPage';
 
 // Check to token to keep user logged in
 if (localStorage.jwtToken) {
@@ -64,7 +65,7 @@ class App extends Component {
               <Route path='/'>
                 <ModalContainer hideModal={this.props.hideModal} />
                 <Navbar />
-                <Dashboard />
+                <MeetPage />
               </Route>
             </Switch>
           </div>
