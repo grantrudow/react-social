@@ -7,21 +7,33 @@ import './MeetPage.css';
 import { logoutUser } from '../../actions/authActions';
 
 // Components
-import SidebarFilter from '../SidebarFilter/SidebarFilter';
+
 import ProfileList from '../ProfileList/ProfileList';
 
 class MeetPage extends Component {
+	constructor(props) {
+		super()
+		this.state = {
+			users: []
+		}
+	}
+
+	componentDidMount() {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(users => this.setState({ users: users })); 
+	}
+	
+
 	render() {
 		return (
 			<div className="meetPage">
 				<div className="meetPage__title">
 					<h1>Meet Others</h1>
 				</div>
-				<div className="meetPage__filter">
-					<SidebarFilter />
-				</div>
+
 				<div className="meetPage__list">
-					<ProfileList />
+					<ProfileList users={this.state.users} />
 				</div>
 			</div>
 		)

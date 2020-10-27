@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 import { hideModal, showModal } from '../../actions/modalActions';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 // Components
@@ -11,6 +12,9 @@ import ModalContainer from '../ModalContainer/ModalContainer';
 
 // TEMP COMPONENT REMOVE ON DEPLOY
 import faker from 'faker';
+
+// Material UI
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 // Modal Dispatch 
 const mapDispatchToProps = dispatch => ({
@@ -60,17 +64,30 @@ class Navbar extends Component {
 			<div className="navbar__fullWidth">
 				<div className="navbar">
 					<div className="navbar__menu">
-						<h3>Meet</h3>
-						<h3>Greet</h3>
-						<h3>Work</h3>
+						<Link to="/">
+							<h3>Home</h3>
+						</Link>
+						<Link to="/meet">
+							<h3>Meet</h3>
+						</Link>
+						<Link to="/greet">
+							<h3>Greet</h3>
+						</Link>
+						<Link to="/work">
+							<h3>Work</h3>
+						</Link>
 					</div>
 					<div className="navbar__createPost">
 						<button onClick={this.openCreatePostModal}>Create Post</button>
 					</div>
 					<div className="navbar__profile">
 						<button onClick={this.onLogoutClick}>Logout</button>
-						<h3>{faker.name.findName()}</h3>
-						<img src={faker.image.avatar()} />
+						<Link to="/login">
+							<AccountCircleIcon/>
+						</Link>
+						
+						{/* <h3>{faker.name.findName()}</h3>
+						<img src={faker.image.avatar()} /> */}
 					</div>
 				</div>
 			</div>

@@ -5,33 +5,28 @@ import faker from 'faker';
 // Components
 import ProfileCard from '../ProfileCard/ProfileCard';
 
-class ProfileList extends Component {
-	render() {
-		return (
-			<div className="profileList">
-				<div className="profileList__card">
-					<ProfileCard />
-				</div>
-				<div className="profileList__card">
-					<ProfileCard />
-				</div>
-				<div className="profileList__card">
-					<ProfileCard />
-				</div>
-				<div className="profileList__card">
-					<ProfileCard />
-				</div>
-				<div className="profileList__card">
-					<ProfileCard />
-				</div><div className="profileList__card">
-					<ProfileCard />
-				</div>
-				<div className="profileList__card">
-					<ProfileCard />
-				</div>
-			</div>
-		)
-	}
+
+const ProfileList = ({users}) => {
+
+	return (
+		<div className="profileList">
+			{
+				users.map((user, i) => {
+					return (
+						<div className="profileList__card">
+							<ProfileCard
+							key={i}
+							id={users[i].id}
+							name={users[i].name}
+							email={users[i].email}
+							/>
+						</div>
+						
+					)
+				})
+			}
+		</div>
+	)
 }
 
 export default ProfileList;

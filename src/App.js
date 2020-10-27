@@ -17,6 +17,7 @@ import PrivateRoute from './components/private-route/PrivateRoute';
 import Navbar from './components/Navbar/Navbar';
 import ModalContainer from './components/ModalContainer/ModalContainer';
 import MeetPage from './components/MeetPage/MeetPage';
+import Home from './components/Home/Home';
 
 // Check to token to keep user logged in
 if (localStorage.jwtToken) {
@@ -57,15 +58,15 @@ class App extends Component {
               <Route exact path='/register'>
                 <Register />
               </Route>
-              <PrivateRoute exact path='/dashboard'>
-              <ModalContainer hideModal={this.props.hideModal} />
+              <PrivateRoute exact path='/meet'>
+                <ModalContainer hideModal={this.props.hideModal} />
                 <Navbar />
-                <Dashboard />
+                <MeetPage />
               </PrivateRoute>
               <Route path='/'>
                 <ModalContainer hideModal={this.props.hideModal} />
                 <Navbar />
-                <MeetPage />
+                <Home />
               </Route>
             </Switch>
           </div>

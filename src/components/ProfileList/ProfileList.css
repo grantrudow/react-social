@@ -1,11 +1,65 @@
 .profileList {
 	display: grid;
-	grid-template-columns: repeat(8, 1fr);
+	grid-template-columns: repeat(1, 1fr);
+	grid-template-rows: repeat(auto-fill, auto);
 	grid-auto-flow: row;
 	gap: 20px;
-	height: 100%;
-}
+}	
 
 .profileList__card {
-	grid-column: span(8);
+	grid-column: span(2);
+
+}
+
+
+@media only screen and (min-width: 700px) {
+	.profileList {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(auto-fill, auto);
+		grid-auto-flow: row;
+	}	
+	
+	.profileList__card {
+		grid-column: span(4);
+	}
+}
+
+@media only screen and (min-width: 900px) {
+	.profileList {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(auto-fill, auto);
+		grid-auto-flow: row;
+	}	
+	
+	.profileList__card {
+		grid-column: span(4);
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.profileList {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(auto-fill, auto);
+		grid-auto-flow: row;
+	}	
+	
+	.profileList__card {
+		grid-column: span(2);
+	}
+}
+
+@media only screen and (min-width: 1500px) {
+	.profileList {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		grid-template-rows: repeat(auto-fill, auto);
+		grid-auto-flow: row;
+	}	
+	
+	.profileList__card {
+		grid-column: span(2);
+	}
 }
